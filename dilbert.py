@@ -1,10 +1,24 @@
+import os
 import requests
 from datetime import date
 from bs4 import BeautifulSoup
 from bs4.dammit import EncodingDetector
 
-today = (date.today().isoformat())
-url = f"https://dilbert.com/strip/{date.today().isoformat()}"
+
+# Get ENV 
+try:
+    pushover_token = os.environ['PUSHOVER_TOKEN']
+except Exception as e:
+    print("ERROR: Pushover Token not found", e)
+
+try:
+    pushover_user = os.environ['PUSHOVER_USER']
+except Exception as e:
+    print("ERROR: Pushover User not found", e)
+
+
+today = (date.today())
+url = f"https://dilbert.com/strip/{today.isoformat()}"
 print(url)
 # example image url:
 #url = "https://assets.amuniversal.com/b11775c0a81b0138120f005056a9545d"
@@ -24,9 +38,19 @@ if r.status_code == 200:
         with open("dilbert.jpg", 'wb') as f:
             f.write(get_comic.content)
 
-
     
 #with open("dilbert.jpg", 'wb') as f:
 #        f.write(r.content)
 else:
     print("error getting webpage")
+
+
+r = requests.post("https://api.pushover.net/1/messages.json", data = {
+  "token": pushover_token,
+  "user": pushover_user,
+  "message": f'Dilbert Comic for {today.strftime("%A %B %d, %Y")}'
+},
+files = {
+  "attachment": ("dilbert.jpg", open("dilbert.jpg", "rb"), "image/jpeg")
+})
+print(r.text)
