@@ -1,5 +1,6 @@
 # cloned from https://github.com/github/gitignore/blob/master/Python.gitignore
 # Custom Stuff
+cron_log.txt
 
 # ignore the .jpg file downloades. Will move to a different directory someday 
 *.jpg

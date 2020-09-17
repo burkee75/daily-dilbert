@@ -31,7 +31,7 @@ if r.status_code == 200:
         #print(link.get("href"))
     comic_image = soup.find('img', {'class': 'img-responsive img-comic'})
     print(comic_image.get('src'))
-    comic_url = f"https:{comic_image.get('src')}"
+    comic_url = comic_image.get('src')
     print(comic_url)
     get_comic = requests.get(url=comic_url)
     if get_comic.status_code == 200:
