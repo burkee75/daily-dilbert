@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  dailydilbert:
+    image: dailydilbert
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: 
+      - /etc/localtime:/etc/localtime
+    env_file:
+      - .env
