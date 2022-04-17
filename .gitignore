@@ -2,6 +2,10 @@
 # Custom Stuff
 cron_log.txt
 
+# Dev
+.vscode/
+.dockerignore
+
 # ignore the .jpg file downloades. Will move to a different directory someday 
 *.jpg
 
