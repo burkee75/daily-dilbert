@@ -1,11 +1,8 @@
-version: '3.4'
+version: '3'
 
 services:
   dailydilbert:
-    image: dailydilbert
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: burkettlabs/daily-dilbert
     volumes: 
       - /etc/localtime:/etc/localtime
     env_file:
